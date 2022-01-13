@@ -1,0 +1,21 @@
+package pages;
+
+public class Temp { /*Scenario Outline: Check that user can`t sign in with  not valid username
+    Given User opens '<homePage>' page
+    And User checks Sign in button visibility
+    When  User click Sign in button
+    When User check username input field visibility
+    And  User fill in username filed with '<username>'
+    When User check Continue button visibility
+    And   User click Continue button
+    When User check password input field visibility
+    And   User fill in password input field with text '<password>'
+    When User check Sign in button visibility
+    And  User click Sign in
+    Then User checks that error message displayed
+
+    Examples:
+            | homePage                | username    | password      |
+            | https://www.ebay.com/   | testUser    | testPassword  |
+*/
+}
