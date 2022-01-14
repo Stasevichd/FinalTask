@@ -1,10 +1,8 @@
 package manager;
 
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.WebDriver;
-import pages.ConfirmSignInPage;
-import pages.HomePage;
-import pages.SearchResultpage;
-import pages.SignInPage;
+import pages.*;
 
 public class PageFactoryManager {
 
@@ -17,8 +15,21 @@ public class PageFactoryManager {
     public HomePage getHomePage() {
         return new HomePage(driver);
     }
-    public SignInPage getSignInPage(){return new SignInPage(driver);}
-    public ConfirmSignInPage getConfirmSignInPage(){return new ConfirmSignInPage(driver);}
 
-    public SearchResultpage getSearchResultPage() {return new SearchResultpage(driver);}
+    public SignInPage getSignInPage() {return new SignInPage(driver);}
+
+    public ConfirmSignInPage getConfirmSignInPage() {return new ConfirmSignInPage(driver);}
+
+    public SearchResultpage getSearchResultPage() { return new SearchResultpage(driver);}
+
+    public ProductPage getProductPage() {return new ProductPage(driver);}
+
+    public ShoppingCartPage getShoppingCartPage(){return new ShoppingCartPage(driver);}
+
+    public CheckoutPage getCheckoutPage(){return new CheckoutPage(driver);}
+
+
+
 }
+
+

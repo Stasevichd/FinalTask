@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class SearchResultpage extends BasePage{
+
+
     public SearchResultpage(WebDriver driver) {
         super(driver);
     }
@@ -26,15 +28,26 @@ public class SearchResultpage extends BasePage{
     @FindBy(xpath = "//button[@aria-label='Submit price range']")
     private WebElement submitPriceRange;
 
+    @FindBy(xpath = "//input[@aria-label='New']")
+    private WebElement onlyNewFilterRadio;
+
 
     public void selectFirstProductFromList(){
         List<WebElement> resultList = this.resultList;
         resultList.get(1).findElement(By.xpath("//div[@class='s-item__image-section']")).click();
     }
 
+    public void selectProductByIndexFromResultList(String index){
+        List<WebElement> resultList = this.resultList;
+        resultList.get(Integer.parseInt(index)).findElement(By.xpath("//div[@class='s-item__image-section']")).click();
+    }
+
+
     public void selectBuyNowFilter(){
        buyItNowfilterRadio.click();
     }
+    public void selectOnlyNewFilter(){onlyNewFilterRadio.click();}
+
     public void submitPriceRange(){
         submitPriceRange.click();
     }

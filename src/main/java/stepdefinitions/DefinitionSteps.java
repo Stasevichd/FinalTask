@@ -8,10 +8,7 @@ import io.cucumber.java.en.When;
 import manager.PageFactoryManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pages.ConfirmSignInPage;
-import pages.HomePage;
-import pages.SearchResultpage;
-import pages.SignInPage;
+import pages.*;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static org.junit.Assert.assertTrue;
@@ -24,10 +21,11 @@ public class DefinitionSteps {
     SignInPage signInPage;
     ConfirmSignInPage confirmSignInPage;
     SearchResultpage searchResultpage;
-    //ShoppingCartPage shoppingCartPage;
+    ProductPage productPage;
+    ShoppingCartPage shoppingCartPage;
    // SearchResultsPage searchResultsPage;
-   // ProductPage productPage;
-  //  CheckoutPage checkoutPage;
+
+   CheckoutPage checkoutPage;
     PageFactoryManager pageFactoryManager;
 
     @Before
@@ -37,10 +35,7 @@ public class DefinitionSteps {
         driver.manage().window().maximize();
         pageFactoryManager = new PageFactoryManager(driver);   }
 
-    @After
-    public void tearDown() {
-        driver.close();
-    }
+
 
 
     @And("User opens {string} page")
@@ -102,11 +97,7 @@ public class DefinitionSteps {
         homePage.clickToSearchButton();
     }
 
-    @When("User select first product from search result")
-    public void selectFirstProduct() {
 
-        searchResultpage.selectFirstProductFromList();
-    }
 
     @When("User change min price to {string}")
     public void changeMinPriceToMinValue(String minValue) {
@@ -130,6 +121,90 @@ public class DefinitionSteps {
         searchResultpage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
         searchResultpage.checkSearchResultContainsKeyword(keyword);
 
+    }
+
+    @After
+    public void tearDown() {driver.close();
+    }
+
+    @When("User select product with {string} from result list")
+    public void selectProductWithIndexFromSearchResultList(String index) {
+        searchResultpage.selectProductByIndexFromResultList(index);
+
+    }
+
+    @When("User checks that description of product is visible")
+    public void checkProductDescriptionVisible() {
+        productPage.isDescriptionTabVisible();
+    }
+
+
+    @And("User checks  addToCart button visibility")
+    public void checkAddToCartButtonVisibility() {
+        productPage = pageFactoryManager.getProductPage();
+        productPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        productPage.isAddToCartButtonVisible();
+    }
+
+    @And("User checks  buyNow button visibility")
+    public void checksBuyNowButtonVisibility() {
+        productPage.isBuyNowButtonVisible();
+    }
+
+    @And("User checks quantity field visibility")
+    public void checkQuantityFieldVisibility() {
+        productPage.isquantityInputVisible();
+    }
+
+
+
+
+
+    @When("User checks  opened shopping cart")
+    public void CheckOpenedShoppingCart() {
+        shoppingCartPage = pageFactoryManager.getShoppingCartPage();
+        shoppingCartPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        shoppingCartPage.isHeaderVisible();
+    }
+
+    @When("User clicks 'add to cart'")
+    public void clickAddToCart() {
+        productPage.clickAddToCartButton();
+    }
+
+    @And("User checks 'Go to checkout' button visibility")
+    public void checkToCheckoutButtonVisibility() {
+        shoppingCartPage.isCheckOutButtonVisible();
+    }
+
+
+    @And("User clicks 'Go to checkout' button")
+    public void clicksGoToCheckoutButton() {
+        shoppingCartPage.clickChecOutButton();
+    }
+
+    @When("User clicks Continue as Guest button")
+    public void clickContinueAsGuestButton() {
+        shoppingCartPage.clickContinueCheckoutAsGuestButton();
+
+    }
+
+    @When("User checks Pay methods form visibility")
+    public void checkPayMethodsFormVisibility() {
+        checkoutPage = pageFactoryManager.getCheckoutPage();
+        checkoutPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        checkoutPage.isPayMethodsFormVisible();
+
+    }
+
+    @And("User checks Ship to form visibility")
+    public void checkShipToFormVisibility() {
+        checkoutPage.isClientDataFormVisible();
+    }
+
+    @And("User checks Confirm and pay button visibility")
+    public void checksConfirmAndPayButtonVisibility() {
+        checkoutPage.isConfirmAndPayButtonVisible();
     }
 }
 
