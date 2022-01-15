@@ -1,6 +1,5 @@
 package manager;
 
-import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
@@ -20,7 +19,7 @@ public class PageFactoryManager {
 
     public ConfirmSignInPage getConfirmSignInPage() {return new ConfirmSignInPage(driver);}
 
-    public SearchResultpage getSearchResultPage() { return new SearchResultpage(driver);}
+    public SearchResultPage getSearchResultPage() { return new SearchResultPage(driver);}
 
     public ProductPage getProductPage() {return new ProductPage(driver);}
 

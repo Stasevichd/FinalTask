@@ -82,6 +82,8 @@ public class HomePage extends BasePage{
         searchField.sendKeys(keyword);
     }
 
+
+
     public void clickToSearchButton(){
         searchButton.click();
     }
@@ -100,6 +102,9 @@ public class HomePage extends BasePage{
 
     public void clickCartButton(){
         shoppingCartButton.click();
+    }
+
+    public boolean isShipToButtonvisible() {return shipToButton.isDisplayed();
     }
 
 

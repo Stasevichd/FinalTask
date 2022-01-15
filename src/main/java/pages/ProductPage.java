@@ -13,7 +13,7 @@ public class ProductPage extends BasePage {
     @FindBy (xpath = "//a[@id='isCartBtn_btn']")
     private WebElement addToCartButton;
 
-    @FindBy (xpath = "//a[id='id='binBtn_btn']")
+    @FindBy (xpath = "//a[@id='binBtn_btn']")
     private WebElement buyNowButton;
 
     @FindBy (xpath = "//a[@n='Watch list']")
@@ -24,6 +24,9 @@ public class ProductPage extends BasePage {
 
     @FindBy (xpath = "//a[contains(text(),'Description')]")
     private WebElement descriptionTab;
+
+    @FindBy (xpath = "//div[@id='w1-13-_errMsg']")
+    private WebElement errorQuntityMessage;
 
     public void clickAddToCartButton(){addToCartButton.click();}
 
@@ -36,10 +39,18 @@ public class ProductPage extends BasePage {
     public boolean isDescriptionTabVisible(){
         waitVisibilityOfElement( 10, descriptionTab);
         return descriptionTab.isDisplayed();}
-    public boolean isAddToCartButtonVisible(){return addToCartButton.isDisplayed();}
+
+    public boolean isAddToCartButtonVisible(){
+        String temp  = driver.getTitle();
+        return addToCartButton.isDisplayed();}
     public boolean isAddToWishListButtonVisible(){return addToWishlistButton.isDisplayed();}
-    public boolean isBuyNowButtonVisible(){return buyNowButton.isDisplayed();}
+
+    public boolean isBuyNowButtonVisible(){
+        return buyNowButton.isDisplayed();}
+
     public boolean isquantityInputVisible(){return quantityInput.isDisplayed();}
+
+    public boolean isErrorQuantityMessageVisible(){return errorQuntityMessage.isDisplayed();}
 
 
 

@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,17 +23,20 @@ public class ShoppingCartPage extends BasePage{
     @FindBy (xpath = "//h1[@class='main-title']")
     private WebElement shoppingCartHeader;
 
-    @FindBy (xpath = "//span[text()='You don't have any items in your cart.']")
+    @FindBy (xpath = "//div[@class='empty-cart']")
     private WebElement emptyCart;
 
-    @FindBy (xpath = "//button[text()='Continue as guest']")
+    @FindBy (xpath = "//button[@class='btn btn--secondary btn--large btn--fluid']")
     private WebElement continueCheckoutAsGuestButton;
 
-    public boolean isCartEmpty(){return emptyCart.isDisplayed();}
+    public boolean isCartEmpty(){
+        waitVisibilityOfElement(10,emptyCart);
+        return emptyCart.isDisplayed();}
 
     public boolean isCheckOutButtonVisible(){return checkoutButton.isDisplayed();}
 
-    public boolean isCartContainsProduct(){return shoppingCartHeader.getText().equalsIgnoreCase("item");}
+    public boolean isCartContainsCountProducts(String count){return shoppingCartHeader.getText().contains(count);}
+
     public boolean isHeaderVisible(){return shoppingCartHeader.isDisplayed();}
 
     public boolean isRemoveButtonVisible(){return removeButton.isDisplayed();}
@@ -43,7 +47,9 @@ public class ShoppingCartPage extends BasePage{
 
     public void clickChecOutButton(){checkoutButton.click();}
 
-    public void clickContinueCheckoutAsGuestButton(){continueCheckoutAsGuestButton.click();}
+    public void clickContinueCheckoutAsGuestButton(){
+       waitVisibilityOfElement(100,continueCheckoutAsGuestButton);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", continueCheckoutAsGuestButton);}
 
 
 }
