@@ -286,6 +286,10 @@ public class DefinitionSteps {
   public void checkProductsOnlyAuctionStatus() {
       assertTrue(searchResultpage.isBidFieldVisible());
   }
+
+  @When("User set Only By now filter")
+  public void userSetOnlyByNowFilter() {searchResultpage.selectBuyNowFilter();
+  }
 }
 
 

@@ -41,7 +41,7 @@ Feature: Smoke
 
     Examples:
       | homePage                | keyword|indexFromSearchResultList |
-      | https://www.ebay.com/   |  ball  |           1              |
+      | https://www.ebay.com/   |  macbook|           1              |
 
 
     Scenario Outline: Check search result price filter
@@ -49,6 +49,7 @@ Feature: Smoke
       And User checks search field visibility
       And User makes search by keyword '<keyword>'
       When User check that search results contains '<keyword>'
+     # When User set Only By now filter
       When User change min price to '<minValue>'
       And  User change max price to '<maxValue>'
       And User submit price range
@@ -56,7 +57,7 @@ Feature: Smoke
 
       Examples:
         | homePage                | keyword | minValue | maxValue |
-        | https://www.ebay.com/   |  ball   | 250.00   | 500.00   |
+        | https://www.ebay.com/   |  macbook   | 100.00   | 800.00   |
 
 Scenario Outline: Check remove product from shopping cart
 
@@ -77,7 +78,7 @@ Scenario Outline: Check remove product from shopping cart
 
   Examples:
     | homePage                | keyword| indexFromSearchResultList|
-    | https://www.ebay.com/   |  ball  | 2                        |
+    | https://www.ebay.com/   |  macbook  | 2                        |
 
 
   Scenario Outline: Check add product to shopping cart and continue shopping another product
@@ -99,7 +100,7 @@ Scenario Outline: Check remove product from shopping cart
     When User checks that opened shopping cart contains '<count>' products
     Examples:
       | homePage                | firstKeyword| indexFirstProduct|secondKeyword|indexSecondProduct|count|
-      | https://www.ebay.com/   |  ball       | 2                | rc toys     |3                 |2    |
+      | https://www.ebay.com/   |  macbook       | 2                | rc toys     |3                 |2    |
 
 
 
@@ -118,8 +119,8 @@ Scenario Outline: Check remove product from shopping cart
 
     Examples:
       | homePage                | firstKeyword|indexFirstProduct |negativeValue|
-      | https://www.ebay.com/   |  ball       |           1      | -5          |
-      |https://www.ebay.com/    |  ball       |     1            |     1000000 |
+      | https://www.ebay.com/   |  macbook       |           1      | -5          |
+      |https://www.ebay.com/    |  macbook       |     1            |     1000000 |
 
 
   Scenario Outline: Check search result condition filter
@@ -132,7 +133,7 @@ Scenario Outline: Check remove product from shopping cart
 
     Examples:
       | homePage                | keyword |
-      | https://www.ebay.com/   |  ball   |
+      | https://www.ebay.com/   |  macbook   |
 
 
   Scenario Outline: Check search result Auction filter
@@ -145,7 +146,7 @@ Scenario Outline: Check remove product from shopping cart
 
     Examples:
       | homePage                | keyword |
-      | https://www.ebay.com/   |  ball   |
+      | https://www.ebay.com/   |  macbook   |
 
 
 

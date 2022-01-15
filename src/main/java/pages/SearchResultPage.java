@@ -123,10 +123,9 @@ public class SearchResultPage extends BasePage{
     public boolean checkSearchResultContainsKeyword(String keyword){
         boolean temp = false;
         for (WebElement result: productsNameList) {
-            if(result.getText().
+            if(!result.getText().
                     toLowerCase(Locale.ROOT).
-                    contains(keyword)) {temp = true;}else
-                        return false;
+                    contains(keyword)) return false;
         }
     return true;
     }
@@ -146,9 +145,10 @@ public class SearchResultPage extends BasePage{
 
         for (WebElement productPrice : productsPriceList) {
            String price = productPrice.getText().replaceAll("[$]", "");
-            String temp= price;
-            double  rte = Double.parseDouble(temp);
-           if (rte < Double.parseDouble(minValue) || rte > Double.parseDouble(maxValue)) return false;
+          if (price.contains("to")){
+            price =   price.substring(0, price.indexOf(' '));          }
+            double  priceValue = Double.parseDouble(price);
+           if (priceValue < Double.parseDouble(minValue) || priceValue > Double.parseDouble(maxValue)) return false;
         }
         return true;
     }
