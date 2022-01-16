@@ -1,16 +1,13 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 public class SearchResultPage extends BasePage{
 
@@ -20,6 +17,10 @@ public class SearchResultPage extends BasePage{
     public SearchResultPage(WebDriver driver) {
         super(driver);
     }
+
+    @FindBy (xpath = "//h1[text()='Bad Request']")
+    WebElement inputScriptError;
+
     @FindBy (xpath = "//input[@aria-label='Buy It Now']")
     private WebElement buyItNowfilterRadio;
 
@@ -53,11 +54,21 @@ public class SearchResultPage extends BasePage{
     @FindBy(xpath = "//span[@class='s-item__bids s-item__bidCount']")
     private List<WebElement> bidsCount;
 
+    @FindBy(xpath = "//span[@id='nid-OpL-1']")
+    private WebElement openSortList;
+
+    @FindBy(xpath = "//span[contains(text(),'lowest;)]")
+    private WebElement selectLowerstPrice;
+
+    public void openSortMenu(){openSortList.click();}
+
+    public boolean isInputScriptErrorVisible(){
+       return inputScriptError.isDisplayed();
+    }
 
     public boolean isBidFieldVisible(){
         for (WebElement result : bidsCount) {
             if(!result.getText().contains("bid")) return false;
-
         }
         return true;
     }
@@ -88,9 +99,8 @@ public class SearchResultPage extends BasePage{
         driver.close();
         driver.switchTo().window(tab2);
         waitForPageLoadComplete(100);
-
-
     }
+
 
 
     public void selectBuyNowFilter(){

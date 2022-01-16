@@ -6,9 +6,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import manager.PageFactoryManager;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
 import pages.*;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
@@ -26,6 +27,7 @@ public class DefinitionSteps {
     ShoppingCartPage shoppingCartPage;
     CheckoutPage checkoutPage;
     PageFactoryManager pageFactoryManager;
+    ShipToPopup shipToPopup;
 
     @Before
     public void testsSetUp() {
@@ -100,6 +102,13 @@ public class DefinitionSteps {
         homePage.eterTextToSearchField(keyword);
         homePage.clickToSearchButton();
     }
+
+    @FindBy(xpath = "//h1[text()='Bad Request']")
+  WebElement scriptEnterError;
+
+    public void  isErrorInputScriptVisible(){
+      scriptEnterError.click();
+    };
 
 
 
@@ -194,7 +203,6 @@ public class DefinitionSteps {
         checkoutPage = pageFactoryManager.getCheckoutPage();
         checkoutPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
        assertTrue(checkoutPage.isPayMethodsFormVisible());
-
     }
 
     @And("User checks Ship to form visibility")
@@ -207,7 +215,6 @@ public class DefinitionSteps {
       assertTrue(checkoutPage.isConfirmAndPayButtonVisible());
     }
 
-
   @When("User selects 'new condition'  filter")
   public void selectsNewConditionFilter() {
       searchResultpage.selectOnlyNewFilter();
@@ -218,8 +225,6 @@ public class DefinitionSteps {
       searchResultpage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
      assertTrue(searchResultpage.isAllProductsNewCondition());
   }
-
-
 
   @When("User checks that products price is beetwen {string} and {string}")
   public void checkThatProductsPriceIsBeetwenMinValueAndMaxValue(String minValue, String maxValue) {
@@ -289,6 +294,37 @@ public class DefinitionSteps {
 
   @When("User set Only By now filter")
   public void userSetOnlyByNowFilter() {searchResultpage.selectBuyNowFilter();
+  }
+
+  @When("User checks ShipTo button visibility")
+  public void checkShipToButtonVisibility() {
+      assertTrue(homePage.isShipToButtonvisible());
+  }
+
+  @When("User clicks Ship to button")
+  public void clickShipToButton() {
+      homePage.clickShipToButton();
+  }
+
+
+  @When("User checks Ukraine country")
+  public void checkUkraineCountry() {
+      shipToPopup.changeToUkraine();
+  }
+
+  @And("User clicks Done Button")
+  public void clickDoneButton() {shipToPopup.clickDoneButton();
+  }
+
+  @When("User opens sort menu")
+  public void userOpensSortMenu() {searchResultpage.openSortMenu();
+  }
+
+  @When("User checks input error message visibility")
+  public void userChecksInputErrorMessageVisibility() {
+      searchResultpage = pageFactoryManager.getSearchResultPage();
+      searchResultpage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+      assertTrue(searchResultpage.isInputScriptErrorVisible());
   }
 }
 

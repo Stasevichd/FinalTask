@@ -31,7 +31,10 @@ public class ProductPage extends BasePage {
     public void clickAddToCartButton(){addToCartButton.click();}
 
     public void clickBuyNowButton(){buyNowButton.click();}
-    public void clickAddToWishListButton(){addToWishlistButton.click();}
+
+    public void clickAddToWishListButton(){
+        addToWishlistButton.click();}
+
     public void enterValueToQuantityInput(String count){
         quantityInput.clear();
         quantityInput.sendKeys(count);

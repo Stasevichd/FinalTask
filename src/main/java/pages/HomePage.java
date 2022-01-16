@@ -39,8 +39,6 @@ public class HomePage extends BasePage{
     @FindBy (xpath = "//a[text()='register']")
     private WebElement registerButton;
 
-    private String title = driver.getTitle();
-
     @FindBy (xpath ="//header" )
     private WebElement header;
 
@@ -107,18 +105,6 @@ public class HomePage extends BasePage{
     public boolean isShipToButtonvisible() {return shipToButton.isDisplayed();
     }
 
-
-
-
-   /* @FindBy(xpath = )
-    private WebElement
-
-    @FindBy(xpath = )
-    private WebElement
-
-    @FindBy(xpath = )
-    private WebElement
-
-    @FindBy(xpath = )
-    private WebElement */
+    public void clickShipToButton() {
+        shipToButton.click();   }
 }

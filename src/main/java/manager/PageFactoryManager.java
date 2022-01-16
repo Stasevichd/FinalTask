@@ -27,6 +27,8 @@ public class PageFactoryManager {
 
     public CheckoutPage getCheckoutPage(){return new CheckoutPage(driver);}
 
+    public ShipToPopup getShipToPopup(){return new ShipToPopup(driver);}
+
 
 
 }

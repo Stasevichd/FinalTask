@@ -24,13 +24,16 @@ public class CheckoutPage extends BasePage {
     @FindBy(xpath = "//p[@aria-live='polite']")
     private WebElement addShipDetailsError;
 
-
-
     public boolean isAddShipDetailsError(){return addShipDetailsError.isDisplayed();}
+
     public boolean isConfirmAndPayButtonVisible(){return confirmAndPayButton.isDisplayed();}
+
     public boolean isClientDataFormVisible(){return clientDataForm.isDisplayed();}
+
     public boolean isPayMethodsFormVisible(){return payMethodsForm.isDisplayed();}
+
     public boolean isAddCouponsFormVisible(){return addCouponsForm.isDisplayed();}
+
     public void clickConfirmAndPayButton(){confirmAndPayButton.click();}
 
 

@@ -148,7 +148,18 @@ Scenario Outline: Check remove product from shopping cart
       | homePage                | keyword |
       | https://www.ebay.com/   |  macbook   |
 
+Scenario Outline: Check change chip To location
+  Given User opens '<homePage>' page
+  And User checks search field visibility
+  And User makes search by keyword '<keyword>'
+  When User checks input error message visibility
 
+
+
+
+  Examples:
+    | homePage               |keyword |
+    | https://www.ebay.com/  | <script> |
 
 
 
